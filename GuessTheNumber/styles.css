@@ -27,21 +27,34 @@ h1 {
   letter-spacing: 3px;
   text-align: center;
   color: #e6e6e6;
+  transition: 0.4s;
 }
 
 .game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
   padding: 1rem;
-  border: 2px solid green;
+  /* border: 2px solid green; */
   height: 500px;
   color: white;
 }
 
-.game-info {
+.game-start {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.game-range {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
-  width: 100%;
+  width: fit-content;
 }
 
 .game label {
@@ -54,8 +67,98 @@ h1 {
   width: 4rem;
   background-color: transparent;
 }
+
+.game input:focus {
+  outline: none;
+  color: #3ef368;
+}
+
 .game span {
   font-size: 1.5rem;
+}
+
+#roll-btn {
+  padding: 0.5rem 4rem;
+  font-size: 2.4rem;
+  cursor: pointer;
+  align-self: center;
+}
+
+/* Game zone */
+
+.game-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.game-play h3 {
+  font-size: 3rem;
+  text-align: center;
+  transition: 0.4s;
+}
+
+.game-zone {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.game-zone > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 50%;
+  transition: 0.4s;
+}
+
+.game-zone-left input {
+  font-size: 4rem;
+  width: 8rem;
+}
+
+.game-zone-left button {
+  padding: 1rem 2rem;
+}
+
+.game-zone-right span {
+  font-size: 3rem;
+}
+
+/* MODAL */
+.modal-wrapper {
+  position: absolute;
+  left: 0rem;
+  top: 0rem;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  letter-spacing: 0.1rem;
+  box-shadow: rgba(255, 255, 255, 0.426) 0 5px 15px;
+
+  padding: 3rem 4rem;
+  background-color: #2e2e2e;
+  color: white;
+  font-size: 2rem;
+}
+
+.modal-content h4 {
+  letter-spacing: 0.2rem;
 }
 
 /* footer */
@@ -72,4 +175,38 @@ h1 {
 
 div svg:hover {
   background-color: #03a028;
+}
+
+.hide {
+  display: none;
+}
+
+.warning {
+  color: rgb(210, 25, 25);
+  font-size: 1.2rem;
+  position: absolute;
+  top: -2rem;
+  letter-spacing: 0.1rem;
+}
+
+@media (max-width: 900px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .game-zone {
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    font-size: 10px;
+  }
 }
