@@ -84,6 +84,10 @@ h1 {
   align-self: center;
 }
 
+.game-zone-left .tips {
+  font-size: 3rem;
+}
+
 /* Game zone */
 
 .game-play {
@@ -128,6 +132,14 @@ h1 {
   font-size: 3rem;
 }
 
+#reset {
+  font-size: 1.4rem;
+  background-color: rgb(238, 67, 67);
+  border: none;
+  color: white;
+  letter-spacing: 2px;
+}
+
 /* MODAL */
 .modal-wrapper {
   position: absolute;
@@ -161,6 +173,45 @@ h1 {
   letter-spacing: 0.2rem;
 }
 
+.reset-modal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.reset-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #1a1a1a;
+  padding: 4rem;
+  font-size: 4rem;
+  color: white;
+  box-shadow: 2px 2px 15px white;
+}
+
+.reset-content input {
+  font-size: 3rem;
+  width: 50%;
+  align-self: center;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.reset-content button {
+  padding: 1rem 4rem;
+  font-size: 1.5rem;
+  width: max-content;
+  align-self: center;
+}
 /* footer */
 
 .howTo svg {

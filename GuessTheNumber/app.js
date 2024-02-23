@@ -6,10 +6,15 @@ const title = document.querySelector("#title");
 const highscoreShow = document.querySelector("#highscore");
 const guessesLeftShow = document.querySelector("#guesses-left");
 const scoreShow = document.querySelector("#score");
+const tipShow = document.querySelector(".tips");
 
 const guessInput = document.querySelector("#guess");
 const checkBtn = document.querySelector("#check");
+const resetBtn = document.querySelector("#reset");
+const resetBtnModal = document.querySelector("#resetBtn");
 const modalWrapperWon = document.querySelector(".modal-wrapper");
+const resetModal = document.querySelector(".reset-modal");
+const resetInput = document.querySelector("#newRange");
 
 const popIn = [
   { transform: "scale(40%)", opacity: 0 },
@@ -23,6 +28,7 @@ const appear = [
   { transform: "translateX(-100%) scale(40%)", opacity: 0 },
   { transform: "translateX(0) scale(100%)", opacity: 1 },
 ];
+
 const timing = { duration: 800, iterations: 1 };
 const fast = { duration: 300, iterations: 1 };
 
@@ -54,21 +60,45 @@ rangeInput.addEventListener("input", async () => {
 
 checkBtn.addEventListener("click", () => {
   if (!gameOver) {
-    if (parseInt(guessInput.value) !== random) {
-      guessesLeft--;
-      score = score - 100;
-      console.log(random);
-      console.log(score);
-      updateScore();
-      guessInput.value = "";
-    } else {
-      gameOver = true;
-      // Pop modal here
-      animateExtra(modalWrapperWon, popIn, fast);
-      highscore < score ? (highscore = score) : (highscore = highscore);
-      updateModal();
-      highscoreShow.innerHTML = `Highscore: ${highscore} 🏆`;
+    if (guessInput.value) {
+      if (parseInt(guessInput.value) !== random) {
+        guessesLeft--;
+        score = score - 100;
+        addTip(tipShow);
+        updateScore();
+        guessInput.value = "";
+      } else {
+        gameOver = true;
+        tipShow.innerHTML = `💅 Congratulations !`;
+
+        // Pop modal here
+        animateExtra(modalWrapperWon, popIn, fast);
+        highscore < score ? (highscore = score) : (highscore = highscore);
+        updateModal();
+        highscoreShow.innerHTML = `Highscore: ${highscore} 🏆`;
+      }
+      if (guessesLeft === 0) {
+        document.body.style.backgroundColor = "red";
+        tipShow.innerHTML = "Game OVER 🧟‍♂️";
+      }
     }
+
+    if (guessesLeft === 0) {
+      gameOver = true;
+    }
+  }
+});
+
+resetBtn.addEventListener("click", () => {
+  animateExtra(resetModal, appear, fast);
+});
+
+console.log(resetBtnModal);
+resetBtnModal.addEventListener("click", () => {
+  if (resetInput.value) {
+    resetGame();
+    resetInput.value = "";
+    resetModal.classList.toggle("hide");
   }
 });
 
@@ -79,7 +109,33 @@ window.onclick = function (e) {
       modalWrapperWon.classList.toggle("hide");
     }, fast.duration - 40);
   }
+
+  if (e.target == resetModal) {
+    animateOut(resetModal);
+  }
 };
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !rangeDiv.classList.contains("hide")) {
+    rollBtn.click();
+  }
+
+  if (e.key === "Enter") {
+    checkBtn.click();
+  }
+
+  if (e.key === "Escape" && !modalWrapperWon.classList.contains("hide")) {
+    animateOut(modalWrapperWon);
+  }
+
+  if (e.key === "Enter" && !resetModal.classList.contains("hide")) {
+    resetBtnModal.click();
+  }
+
+  if (e.key === "Escape" && !resetModal.classList.contains("hide")) {
+    animateOut(resetModal);
+  }
+});
 
 function startGame() {
   if (rangeInput.value) {
@@ -123,7 +179,7 @@ function createWarning(parent, text) {
 }
 
 function updateHud() {
-  title.innerHTML += " " + rangeInput.value;
+  title.innerHTML = `Ok here we go. Pick a number between 0 and ${rangeInput.value}`;
   score = 1000;
   guessesLeft = 10;
   guessesLeftShow.innerHTML = `Guesses left: ${guessesLeft} 👾`;
@@ -164,4 +220,20 @@ function updateModal() {
 
   number.innerHTML = `The number was indeed: ${random}`;
   scored.innerHTML = `You scored : ${score} 🎉`;
+}
+
+function resetGame() {
+  updateHud();
+  title.innerHTML = `Ok here we go. Pick a number between 0 and ${resetInput.value}`;
+  guessInput.value = "";
+  random = Math.floor(Math.random() * resetInput.value) + 1;
+  gameOver = false;
+  document.body.style.backgroundColor = "#151515";
+  tipShow.innerHTML = `Good luck!`;
+}
+
+function addTip(element) {
+  parseInt(guessInput.value) > random
+    ? (element.innerHTML = `📈 Too high!`)
+    : (element.innerHTML = `📉 Too low!`);
 }

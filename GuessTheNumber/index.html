@@ -9,6 +9,21 @@
   </head>
   <body>
     <h1>Welcome to the Guessing Game</h1>
+    <!-- ! Reset modal -->
+    <div class="reset-modal hide">
+      <div class="reset-content">
+        <label for="newRange">Enter a new Range:</label>
+        <input
+          type="text"
+          id="newRange"
+          name="newRange"
+          maxlength="3"
+          min="0"
+          max="999"
+        />
+        <button id="resetBtn">Go!</button>
+      </div>
+    </div>
     <div class="modal-wrapper hide">
       <div class="modal-content">
         <h4>🌟 Congratulations!! 🌟</h4>
@@ -29,8 +44,10 @@
         <h3 id="title">Ok here we go. Pick a number between 0 and</h3>
         <div class="game-zone">
           <div class="game-zone-left">
+            <span class="tips">Work</span>
             <input type="text" name="guess" id="guess" />
             <button id="check">CHECK</button>
+            <button id="reset">Start Over</button>
           </div>
           <div class="game-zone-right">
             <span id="guesses-left">Guesses left:</span>
