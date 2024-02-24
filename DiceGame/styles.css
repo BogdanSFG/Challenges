@@ -22,7 +22,7 @@ body {
   display: inherit;
   flex-direction: inherit;
   /* border: 2px solid red; */
-  gap: 5rem;
+  gap: 6rem;
   width: 90%;
   transition: 0.4s;
 }
@@ -101,6 +101,28 @@ button {
   transition: 0.4s;
   z-index: 2;
   cursor: pointer;
+}
+
+.reset-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.reset-container::after {
+  position: absolute;
+  content: 'Restart';
+  z-index: 2;
+  left: 50%;
+  top: 100%;
+  transition: 0.4s;
+  transform: scaleX(0%) translateX(-100%);
+  font-weight: 500;
+  font-size: 2rem;
+  color: white;
+}
+.reset-container:hover::after {
+  transform: scaleX(100%) translateX(60%);
 }
 
 #reset:hover {
